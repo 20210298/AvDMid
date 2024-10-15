@@ -5,8 +5,9 @@
 using namespace std;
 
 class nQueen {
-    int boardSize;
     vector<int> board;
+protected:
+    int boardSize;
 public:
     nQueen() : boardSize(0), board(0) {}
 
@@ -24,16 +25,16 @@ public:
         return true;
     };
 
-    virtual void solve(int row = 0) {
-        if (row == boardSize) {
+    virtual void solve(int currentRow = 0) {
+        if (currentRow == boardSize) {
             showResult();
             return;
         }
-        for (int col = 0; col < boardSize; ++col) {
-            if (canPlaceQueen(row, col)) {
-                board[row] = col;
-                solve(row + 1);
-                board[row] = -1;
+        for (int currentCol = 0; currentCol < boardSize; ++currentCol) {
+            if (canPlaceQueen(currentRow, currentCol)) {
+                board[currentRow] = currentCol;
+                solve(currentRow + 1);
+                board[currentRow] = -1;
             }
         }
     };
@@ -62,13 +63,29 @@ class nQueenByBitMask : public nQueen {
 public:
     nQueenByBitMask() : nQueen(), columnMask(0), diagonalMask(0), antiDiagonalMask(0) {}
 
-    void solve(int row = 0) override;
+    void solve(int row = 0) override {
+        if (row == boardSize) {
+            showResult();
+            return;
+        }
+        for (int col = 0; col < boardSize; ++col) {
+            if (canPlaceQueen(row, col)) {
+                placeQueen(row, col);
+                solve(row + 1);
+                removeQueen(row, col);
+            }
+        }
+    }
 
-    bool canPlaceQueen(int currentRow, int currentCol) override;
+    bool canPlaceQueen(int currentRow, int currentCol) override {
+        return !(columnMask & (1 << currentCol)) &&
+               !(diagonalMask & (1 << (currentRow - currentCol + boardSize - 1))) &&
+               !(antiDiagonalMask & (1 << (currentRow + currentCol)));
+    }
 
-    void placeQueen();
+    void placeQueen(int currentRow, int currentCol);
 
-    void removeQueen();
+    void removeQueen(int currentRow, int currentCol);
 
     void showResult() override;
 };
