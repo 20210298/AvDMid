@@ -63,6 +63,12 @@ class nQueenByBitMask : public nQueen {
 public:
     nQueenByBitMask() : nQueen(), columnMask(0), diagonalMask(0), antiDiagonalMask(0) {}
 
+    bool canPlaceQueen(int currentRow, int currentCol) override {
+        return !(columnMask & (1 << currentCol)) &&
+               !(diagonalMask & (1 << (currentRow - currentCol + boardSize - 1))) &&
+               !(antiDiagonalMask & (1 << (currentRow + currentCol)));
+    }
+
     void solve(int row = 0) override {
         if (row == boardSize) {
             showResult();
@@ -77,17 +83,21 @@ public:
         }
     }
 
-    bool canPlaceQueen(int currentRow, int currentCol) override {
-        return !(columnMask & (1 << currentCol)) &&
-               !(diagonalMask & (1 << (currentRow - currentCol + boardSize - 1))) &&
-               !(antiDiagonalMask & (1 << (currentRow + currentCol)));
+    void placeQueen(int row, int col) {
+        columnMask |= (1 << col);
+        diagonalMask |= (1 << row - col + boardSize - 1);
+        antiDiagonalMask |= (1 << row + col);
     }
 
-    void placeQueen(int currentRow, int currentCol);
+    void removeQueen(int row, int col) {
+        columnMask &= ~(1 << col);
+        diagonalMask &= ~(1 << row - col + boardSize - 1);
+        antiDiagonalMask &= ~(1 << row + col);
+    }
 
-    void removeQueen(int currentRow, int currentCol);
-
-    void showResult() override;
+    void showResult() override {
+        cout << "구현 해야함";
+    }
 };
 
 int main() {
@@ -104,6 +114,10 @@ int main() {
             }
             nQueen q;
             q.setQueenSize(nQueenSize);
+            q.solve();
+
+            nQueenByBitMask qBit;
+            qBit.setQueenSize(nQueenSize);
             q.solve();
             break;
         } catch (const string &exMsg) {
