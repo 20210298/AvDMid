@@ -85,14 +85,14 @@ public:
 
     void placeQueen(int row, int col) {
         columnMask |= (1 << col);
-        diagonalMask |= (1 << row - col + boardSize - 1);
-        antiDiagonalMask |= (1 << row + col);
+        diagonalMask |= (1 << (row - col + boardSize - 1));
+        antiDiagonalMask |= (1 << (row + col));
     }
 
     void removeQueen(int row, int col) {
         columnMask &= ~(1 << col);
-        diagonalMask &= ~(1 << row - col + boardSize - 1);
-        antiDiagonalMask &= ~(1 << row + col);
+        diagonalMask &= ~(1 << (row - col + boardSize - 1));
+        antiDiagonalMask &= ~(1 << (row + col));
     }
 
     void showResult() override {
