@@ -43,3 +43,16 @@ void NQueenSolver::displayResult() const {
     }
     cout << endl;
 }
+
+void NQueenSolver::measureSolveTime(int currentRow) {
+    if (currentRow == boardSize) {
+        return;
+    }
+    for (int currentCol = 0; currentCol < boardSize; ++currentCol) {
+        if (canPlaceQueen(currentRow, currentCol)) {
+            queenPositions[currentRow] = currentCol;
+            measureSolveTime(currentRow + 1);
+            queenPositions[currentRow] = -1;
+        }
+    }
+}

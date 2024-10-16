@@ -7,4 +7,4 @@ add_executable(AvDMid main.cpp
         NQueenSolver.h
         NQueenSolverByBitMask.h
         NQueenSolver.cpp
-        NQueenByBitMask.cpp)
+        NQueenSolverByBitMask.cpp)

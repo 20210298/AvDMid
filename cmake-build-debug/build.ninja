@@ -61,8 +61,8 @@ build CMakeFiles/AvDMid.dir/NQueenSolver.cpp.obj: CXX_COMPILER__AvDMid_unscanned
   OBJECT_DIR = CMakeFiles\AvDMid.dir
   OBJECT_FILE_DIR = CMakeFiles\AvDMid.dir
 
-build CMakeFiles/AvDMid.dir/NQueenByBitMask.cpp.obj: CXX_COMPILER__AvDMid_unscanned_Debug E$:/20210298/AvDMid/NQueenByBitMask.cpp || cmake_object_order_depends_target_AvDMid
-  DEP_FILE = CMakeFiles\AvDMid.dir\NQueenByBitMask.cpp.obj.d
+build CMakeFiles/AvDMid.dir/NQueenSolverByBitMask.cpp.obj: CXX_COMPILER__AvDMid_unscanned_Debug E$:/20210298/AvDMid/NQueenSolverByBitMask.cpp || cmake_object_order_depends_target_AvDMid
+  DEP_FILE = CMakeFiles\AvDMid.dir\NQueenSolverByBitMask.cpp.obj.d
   FLAGS = -g -std=gnu++1z -fdiagnostics-color=always
   OBJECT_DIR = CMakeFiles\AvDMid.dir
   OBJECT_FILE_DIR = CMakeFiles\AvDMid.dir
@@ -75,7 +75,7 @@ build CMakeFiles/AvDMid.dir/NQueenByBitMask.cpp.obj: CXX_COMPILER__AvDMid_unscan
 #############################################
 # Link the executable AvDMid.exe
 
-build AvDMid.exe: CXX_EXECUTABLE_LINKER__AvDMid_Debug CMakeFiles/AvDMid.dir/main.cpp.obj CMakeFiles/AvDMid.dir/NQueenSolver.cpp.obj CMakeFiles/AvDMid.dir/NQueenByBitMask.cpp.obj
+build AvDMid.exe: CXX_EXECUTABLE_LINKER__AvDMid_Debug CMakeFiles/AvDMid.dir/main.cpp.obj CMakeFiles/AvDMid.dir/NQueenSolver.cpp.obj CMakeFiles/AvDMid.dir/NQueenSolverByBitMask.cpp.obj
   FLAGS = -g
   LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\AvDMid.dir

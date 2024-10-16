@@ -1,7 +1,7 @@
 # ninja log v6
-16	331	7507876445923125	CMakeFiles/AvDMid.dir/main.cpp.obj	5706b78524b20bb3
-331	441	7507876449078412	AvDMid.exe	74e7bace8e1dce0
-10	155	7507906275503819	CMakeFiles/AvDMid.dir/NQueenByBitMask.cpp.obj	a84e05b587f6b146
-4	264	7507906275432143	CMakeFiles/AvDMid.dir/main.cpp.obj	5706b78524b20bb3
-7	315	7507906275472830	CMakeFiles/AvDMid.dir/NQueenSolver.cpp.obj	fd45419e1af3d80f
-315	433	7507906278546817	AvDMid.exe	118b48577cdfbb50
+8	358	7507929789602095	CMakeFiles/AvDMid.dir/main.cpp.obj	5706b78524b20bb3
+358	472	7507929793095308	AvDMid.exe	ee2e044fb2becef9
+1	239	7507948173843983	build.ninja	4c3c1bfe695cac19
+6	148	7507913428828469	CMakeFiles/AvDMid.dir/NQueenByBitMask.cpp.obj	a84e05b587f6b146
+6	145	7507920798273531	CMakeFiles/AvDMid.dir/NQueenSolverByBitMask.cpp.obj	376b8005f1f6c682
+3	300	7507920798243087	CMakeFiles/AvDMid.dir/NQueenSolver.cpp.obj	fd45419e1af3d80f

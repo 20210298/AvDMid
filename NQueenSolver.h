@@ -18,6 +18,7 @@ public:
 
     void displayResult() const;
 
+    virtual void measureSolveTime(int currentRow);
 };
 
 #endif //AVDMID_NQUEENSOLVER_H

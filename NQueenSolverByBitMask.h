@@ -5,19 +5,21 @@
 
 class NQueenSolverByBitMask : public NQueenSolver {
 private:
-    int columnMask;
-    int diagonalMask;
-    int antiDiagonalMask;
+    long long columnMask;
+    long long diagonalMask;
+    long long antiDiagonalMask;
 public:
     NQueenSolverByBitMask();
 
     bool canPlaceQueen(int currentRow, int currentCol) const override;
 
-    void solve(int row) override;
+    void solve(int currentRow) override;
 
-    void placeQueen(int row, int col);
+    void placeQueen(int currentRow, int currentCol);
 
-    void removeQueen(int row, int col);
+    void removeQueen(int currentRow, int currentCol);
+
+    void measureSolveTime(int currentRow) override;
 };
 
 #endif //AVDMID_NQUEENSOLVERBYBITMASK_H
