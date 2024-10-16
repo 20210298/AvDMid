@@ -4,21 +4,23 @@
 
 using namespace std;
 
-class nQueen {
-    vector<int> board;
+const int MIN_BOARD_SIZE = 4;
+
+class NQueenSolver {
 protected:
     int boardSize;
+    vector<int> queenPositions;
 public:
-    nQueen() : boardSize(0), board(0) {}
+    NQueenSolver () : boardSize(0) {}
 
     void setQueenSize(const int size) {
         boardSize = size;
-        board.resize(size, -1);
+        queenPositions.resize(size, -1);
     }
 
-    virtual bool canPlaceQueen(int currentRow, int currentCol) {
+    virtual bool canPlaceQueen(int currentRow, int currentCol) const {
         for (int prevRow = 0; prevRow < currentRow; ++prevRow) {
-            int prevCol = board[prevRow];
+            int prevCol = queenPositions[prevRow];
             if (prevCol == currentCol || abs(prevRow - currentRow) == abs(prevCol - currentCol))
                 return false;
         }
@@ -27,28 +29,23 @@ public:
 
     virtual void solve(int currentRow = 0) {
         if (currentRow == boardSize) {
-            showResult();
+            displayResult();
             return;
         }
         for (int currentCol = 0; currentCol < boardSize; ++currentCol) {
             if (canPlaceQueen(currentRow, currentCol)) {
-                board[currentRow] = currentCol;
+                queenPositions[currentRow] = currentCol;
                 solve(currentRow + 1);
-                board[currentRow] = -1;
+                queenPositions[currentRow] = -1;
             }
         }
     };
 
-    virtual void showResult() {
+    void displayResult() const {
         for (int row = 0; row < boardSize; ++row) {
-            int col = board[row];
-            cout << "Row " << row + 1 << " - " << "Col " << col + 1 << " | ";
-            for (col = 0; col < boardSize; ++col) {
-                if (board[row] == col) {
-                    cout << "Q ";
-                } else {
-                    cout << ". ";
-                }
+            cout << "Row " << row + 1 << " - " << "Col " <<  (queenPositions[row] + 1) << " | ";
+            for (int col = 0; col < boardSize; ++col) {
+                cout << (queenPositions[row] == col ? "Q " : ". ");
             }
             cout << endl;
         }
@@ -56,14 +53,14 @@ public:
     };
 };
 
-class nQueenByBitMask : public nQueen {
+class NQueenByBitMask : public NQueenSolver  {
     int columnMask;
     int diagonalMask;
     int antiDiagonalMask;
 public:
-    nQueenByBitMask() : nQueen(), columnMask(0), diagonalMask(0), antiDiagonalMask(0) {}
+    NQueenByBitMask() : NQueenSolver (), columnMask(0), diagonalMask(0), antiDiagonalMask(0) {}
 
-    bool canPlaceQueen(int currentRow, int currentCol) override {
+    bool canPlaceQueen(int currentRow, int currentCol) const override {
         return !(columnMask & (1 << currentCol)) &&
                !(diagonalMask & (1 << (currentRow - currentCol + boardSize - 1))) &&
                !(antiDiagonalMask & (1 << (currentRow + currentCol)));
@@ -71,14 +68,18 @@ public:
 
     void solve(int row = 0) override {
         if (row == boardSize) {
-            showResult();
+            displayResult();
             return;
         }
         for (int col = 0; col < boardSize; ++col) {
             if (canPlaceQueen(row, col)) {
+                queenPositions[row] = col;
                 placeQueen(row, col);
+
                 solve(row + 1);
+
                 removeQueen(row, col);
+                queenPositions[row] = -1;
             }
         }
     }
@@ -94,34 +95,34 @@ public:
         diagonalMask &= ~(1 << (row - col + boardSize - 1));
         antiDiagonalMask &= ~(1 << (row + col));
     }
-
-    void showResult() override {
-        cout << "구현 해야함";
-    }
 };
 
-int main() {
-    int nQueenSize;
-
+void getInput(int &nQueenSize) {
     while (true) {
         cout << "Enter ChessBoardSize (at least 4): ";
         cin >> nQueenSize;
-        cout << endl;
 
-        try {
-            if (nQueenSize < 4) {
-                throw string("Try Again");
-            }
-            nQueen q;
-            q.setQueenSize(nQueenSize);
-            q.solve();
-
-            nQueenByBitMask qBit;
-            qBit.setQueenSize(nQueenSize);
-            q.solve();
+        if (nQueenSize >= MIN_BOARD_SIZE) {
             break;
-        } catch (const string &exMsg) {
-            cout << exMsg << endl;
+        } else {
+            cout << "Invalid size. Please try again." << endl;
         }
     }
+}
+
+void solveNQueens(int nQueenSize) {
+    NQueenSolver q;
+    q.setQueenSize(nQueenSize);
+    q.solve();
+
+    NQueenByBitMask qBit;
+    qBit.setQueenSize(nQueenSize);
+    qBit.solve();
+}
+
+int main() {
+    int nQueenSize;
+    getInput(nQueenSize);
+
+    solveNQueens(nQueenSize);
 }
