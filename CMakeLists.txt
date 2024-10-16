@@ -3,4 +3,8 @@ project(AvDMid)
 
 set(CMAKE_CXX_STANDARD 20)
 
-add_executable(AvDMid main.cpp)
+add_executable(AvDMid main.cpp
+        NQueenSolver.h
+        NQueenSolverByBitMask.h
+        NQueenSolver.cpp
+        NQueenByBitMask.cpp)
