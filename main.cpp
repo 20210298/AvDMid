@@ -70,6 +70,7 @@ void measure(NQueenSolver &solver, int size) {
     cout << "Average execution time: " << average << " nanoseconds" << endl;  // 결과 출력
 }
 
+// todo 베이직, 비트마스킹 순서 버꿔서도 실행해보기
 int main() {
     int nQueenSize;
     getInput(nQueenSize);
